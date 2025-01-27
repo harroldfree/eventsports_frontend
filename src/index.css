@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a.active hr{
+  display: block;  
+}
+
+.prata-regular {
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+*{
+  font-family: "Outfit";
+  
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+/* @media (max-width:1024px) {
+  a.active{
+    background-color: black;
+    color: white;
+  }
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  background: white;
+}
+
+.footer-logo{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.footer-logo p{
+  color: #383838;
+  font-size: 46px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.footer-links{
+  display: flex;
+  list-style: none;
+  gap: 50px;
+  color: #252525;
+  font-size: 20px;
+
+
+}
+
+@media (max-width:1024) {
+  .footer-links{
+    display: flex;
+    list-style: none;
+    gap: 2px;
+    color: #252525;
+    font-size: 5px;
+    
+  }
+  .footer-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+  }
+  
+  .footer-logo p{
+    color: #383838;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  .log{
+    width: 500px;
+    
+  }
+  
+}
+
+.footer-links li{
+  cursor: pointer;
+}
+.footer-social-icon{
+ display: flex;
+ gap: 20px;
+
+}
+.footer-icons-conteneur{
+  padding: 10px;
+  padding-bottom: 6px;
+  background: #fbfbfb; 
+  border: 1px solid#ebebeb;
+}
+.footer-copyright{
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+width: 100%;
+margin-bottom: 30px;
+color: #1a1a1a;
+font-size: 20px;
+
+}
+.footer-copyright hr{
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+  height: 3px;
+  background: #c7c7c7;
+
+}
+
+.section-bg {
+  background: #fff9f1;
+}
+
+.sponsor-section {
+  padding: 50px 0;
+  .section-wrapper {
+      @extend %hidden;
+  }
+}
+
+.section-wrapper {
+  padding: 50px 30px;
+  @extend %text-center;
+  @extend %bg-white;
+  box-shadow: 0 24px 46px rgba(title-color, alpha .12);
+  @include border-radius(12px);
+  .title {
+      font-weight: 500;
+      span {
+          @extend %yellow-color;
+      }
+  }
+  .date {
+      @extend %justify-center;
+      @extend %mb-30;
+      li {
+          width: auto;
+          height: auto;
+          line-height: 1;
+          background: transparent;
+          @include border-radius(0);
+          .count-title {
+              @extend %yellow-color;
+          }
+          p {
+              @extend %desc-color;
+          }
+      }
+  }
+  .lab-btn {
+      @extend %bg-yellow;
+      span {
+          @extend %title-color;
+      }
+      &:hover {
+          box-shadow: 0 5px 10px rgba
+      }
+  }
+} */
