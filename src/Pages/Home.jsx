@@ -1,7 +1,8 @@
 import BestEvent from "../Components/BestEvent"
 import Filter from "../Components/Filter"
 import Header from "../Components/Header"
-import OurPolicy from "./OourPolicy"
+import ProtectedSection from "../Components/ProtectedSection"
+
 
 
 function Home () {
@@ -10,8 +11,10 @@ function Home () {
             
            <div>
                 <Header />
-                <Filter />
-                <BestEvent />
+                <ProtectedSection>
+                    <Filter />
+                    <BestEvent />
+                </ProtectedSection>
                
            </div>
 

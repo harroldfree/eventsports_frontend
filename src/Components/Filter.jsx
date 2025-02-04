@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
+import dropdown_icon from '../assets/dropdown_icon.png'
 import ProductsItem from '../Components/ProductsItem';
 
 const Filter = () => {
   const { products } = useContext(ShopContext);
   const [category, setCategory] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [showFilter,setShowFilter] = useState(false)
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -31,13 +33,12 @@ const Filter = () => {
 
   return (
     <div className='flex flex-col lg:flex-row gap-1 sm:gap-1 pt-10 border-t'>
-      {/* Filter Options */}
-      <div className="min-w-60">
-        <p className="my-2 text-xl flex items-center cursor-pointer gap-2">
-          FILTRES
+        {/* Filter Options */}
+        <div className="min-w-60">
+        <p onClick={()=>setShowFilter(!showFilter)} className="my-2 text-xl flex items-center cursor-pointer gap-2">FILTRES <img className={`h-3 lg:hidden ${showFilter ? 'rotate-90' : ''}`} src={dropdown_icon} alt="" />
         </p>
         {/* CATEGORIE DE FILTRE */}
-        <div className="border border-gray-300 pl-5 py-3 mt-6 lg:block">
+        <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' :'hidden'} lg:block`}>
           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
             <p className="flex gap-2">
@@ -64,7 +65,7 @@ const Filter = () => {
       {/* RIGHT SIDE */}
       <div className="flex-1">
         {/* Map Product */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6">
           {filterProducts.map((item, index) => (
             <ProductsItem key={index} id={item._id} name={item.name} image={item.image} 
             date={item.date} category={item.category} id_utilisateur={item.id_utilisateur}/>

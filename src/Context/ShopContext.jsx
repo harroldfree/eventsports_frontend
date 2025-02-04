@@ -27,13 +27,23 @@ const ShopContextProvider = (props) => {
             listData[itemId] = 1 ;
         }
         setListItems(listData)
-
-
-       
+ 
 
     }
+
+    // Fonction pour se désinscrire d'un événement
+    const unsubscribeFromEvent = (itemId) => {
+        let listData = structuredClone(listItems);
+
+        if (listData[itemId]) {
+            delete listData[itemId]; // Supprimer l'élément de la liste
+            setListItems(listData); // Mettre à jour l'état
+        } else {
+            console.warn("L'élément n'existe pas dans la liste.");
+        }
+    };
     const value = {
-        products , listItems, addToList
+        products , listItems, addToList,unsubscribeFromEvent
     }
     return (
         
