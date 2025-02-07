@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import accueil from "/accueil.png";
 import axios from "axios";
 import toast from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   // État pour stocker les données du formulaire
@@ -11,7 +11,7 @@ function Login() {
     email: "",
     password: "",
   });
-  // const [error, setError] = useState("");
+  
 
   // Gestion des changements dans les champs du formulaire
   const handleChange = (e) => {
@@ -22,9 +22,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simuler une connexion réussie
-    // localStorage.setItem('authToken', 'votre-jeton-d-authentification');
-    // window.location.href = '/';
+   
 
     axios
       .post("/api/users/login", {

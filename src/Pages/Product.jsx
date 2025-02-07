@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ShopContext } from '../Context/ShopContext';
-import RelatedProducts from '../Components/RelatedProducts';
 import toast from 'react-hot-toast';
 import axios from "axios";
 
@@ -54,7 +53,7 @@ function Product() {
 
 
 
-        // setButtonText("Vous êtes inscrits à cet évènement");
+       
 
         setTimeout(() => {
             toast.success("Vous êtes inscrits à l'événement");
@@ -72,7 +71,7 @@ function Product() {
               "Content-Type": "application/json",
               "Authorization": "Bearer " + localStorage.getItem("authToken")
         }})
-        // console.log(resp.data)
+       
         if(resp.data) {
             setProductData(resp.data);
             setImage('http://localhost:3000' + resp.data.image_url);
@@ -115,7 +114,7 @@ function Product() {
                     </div>
                 </div>
             </div>
-            {<RelatedProducts category={productData.category} />}
+            
         </div>
     ) : <div className='opacity-0'></div>;
 }

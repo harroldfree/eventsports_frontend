@@ -28,9 +28,11 @@ const EditEvent = () => {
       headers: { "Authorization": "Bearer " + localStorage.getItem("authToken") }
     })
       .then(response => {
-        console.log("Détails de l'événement récupérés :", response.data); // Ajout d'un log
+        // Ajout d'un log
+        console.log("Détails de l'événement récupérés :", response.data); 
         setEventDetails(response.data);
-        setImagePreview( "http://localhost:3000" + response.data.image_url); // Stocker l'URL actuelle de l'image
+         // Stocker l'URL actuelle de l'image
+        setImagePreview( "http://localhost:3000" + response.data.image_url);
       })
       .catch(error => console.error("Erreur lors de la récupération de l'événement :", error));
   }, [id]);
@@ -42,7 +44,8 @@ const EditEvent = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setNewImage(file);
-    setImagePreview(URL.createObjectURL(file)); // Mettre à jour l'aperçu de l'image
+    // Mettre à jour l'aperçu de l'image
+    setImagePreview(URL.createObjectURL(file)); 
   };
 
   const updateEvent = async () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
-  const [images, setImages] = useState({}); // Stocker les images par ID d'événement
+  const [images, setImages] = useState({}); 
 
   // Récupérer les événements depuis le backend
   useEffect(() => {

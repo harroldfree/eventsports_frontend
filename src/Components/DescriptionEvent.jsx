@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../Context/ShopContext';
 import axios from "axios";
-import toast from "react-hot-toast"; // Pour afficher des notifications
+import toast from "react-hot-toast"; 
 
 function DescriptionEvent () {
     const { productId } = useParams();
@@ -14,10 +14,12 @@ function DescriptionEvent () {
     const handleUnsubscribe = async () => {
         if (window.confirm('Êtes-vous sûr de vouloir vous désinscrire de cet événement ?')) {
             try {
-                await unsubscribeFromEvent(Number(productId)); // Supprime l'inscription en base
+                // Supprime l'inscription en base
+                await unsubscribeFromEvent(Number(productId)); 
                 toast.success("Vous avez été désinscrit avec succès !");
-                setProductData(null); // Met à jour l'état pour refléter la suppression
-                navigate('/'); // Redirige vers l'accueil
+                // Met à jour l'état pour refléter la suppression
+                setProductData(null); 
+                navigate('/'); 
             } catch (error) {
                 toast.error("Erreur lors de la désinscription.");
                 console.error("Erreur de désinscription:", error);
@@ -40,7 +42,8 @@ function DescriptionEvent () {
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
-            setProductData(null); // Mettre à jour l'état si l'événement est introuvable
+             // Mettre à jour l'état si l'événement est introuvable
+            setProductData(null);
         }
     };
 

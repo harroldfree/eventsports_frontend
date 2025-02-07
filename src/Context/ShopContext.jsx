@@ -1,8 +1,7 @@
 import { createContext, useState } from "react";
 import { products } from "../assets/annonce";
 import axios from "axios";
-// const id_user = localStorage.getItem("myid");
-// import { toast } from "react-toastify";
+
 
 
 export const ShopContext = createContext() 
@@ -37,7 +36,7 @@ const ShopContextProvider = (props) => {
     const unsubscribeFromEvent = async (itemId) => {
         try {
             const response = await axios.delete(
-                `/api/participation/${itemId}`, // Correction de l'URL
+                `/api/participation/${itemId}`, 
                 {
                     headers: { 
                         "Content-Type": "application/json",
@@ -45,14 +44,17 @@ const ShopContextProvider = (props) => {
                     }
                 }
             );
-    
-            if (response.status === 200) { // Vérification de la réponse
-                let listData = { ...listItems }; // Copie de l'état actuel
+                // Vérification de la réponse
+            if (response.status === 200) { 
+                // Copie de l'état actuel
+                let listData = { ...listItems }; 
     
                 if (listData[itemId]) {
                     console.log(itemId)
-                    delete listData[itemId]; // Suppression de l'élément
-                    setListItems(listData); // Mise à jour de l'état
+                    // Suppression de l'élément
+                    delete listData[itemId];
+                    // Mise à jour de l'état 
+                    setListItems(listData); 
                 } else {
                     console.warn("L'élément n'existe pas dans la liste.");
                 }

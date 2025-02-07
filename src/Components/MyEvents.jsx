@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Title from './Title'
 
 function MyEvents() {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const id_user = localStorage.getItem("myid"); // Assurez-vous que l'ID utilisateur est bien stocké
+    // Assurez-vous que l'ID utilisateur est bien stocké
+    const id_user = localStorage.getItem("myid"); 
 
     useEffect(() => {
         const fetchUserEvents = async () => {
@@ -36,7 +38,7 @@ function MyEvents() {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Mes Événements</h1>
+            <h1 className="text-2xl font-bold mb-4"><Title  text1={'Mes'} text2={'Evènements'}/></h1>
             {loading ? (
                 <p>Chargement...</p>
             ) : events.length > 0 ? (

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-// import search from '../assets/search.png'
-// import profil from '../assets/profil.png'
 import user from "/user.svg";
-// import cart from '../assets/cart.png'
+
 import menu from "../assets/menu.png";
 import cart_cross_icon from "../assets/cart_cross_icon.png";
 import { Link, NavLink } from "react-router-dom";
 import ProtectedSection from "./ProtectedSection";
 
-// import { ShopContext } from '../Context/ShopContext'
 
 const Navbar = () => {
   const authToken = localStorage.getItem("authToken");

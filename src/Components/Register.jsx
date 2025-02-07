@@ -27,9 +27,7 @@ function Register() {
   // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simuler une inscription réussie
-    // alert(`Inscription réussie !\nNom d'utilisateur: ${formData.username}\nEmail: ${formData.email}`);
-    // Réinitialiser le formulaire après soumission
+   
 
     axios
       .post("/api/users", {
@@ -38,7 +36,6 @@ function Register() {
         motdepasse: formData.password,
       })
       .then(function (response) {
-        // console.log(response);
         toast.success(response.data.message)
         setTimeout(() => {
           navigate("/connexion");

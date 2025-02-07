@@ -27,7 +27,8 @@ setCategories(response.data);
     };
 
     fetchCategories();
-  }, []); // Exécuté une seule fois au montage du composant
+    // Exécuté une seule fois au montage du composant
+  }, []); 
 
   const imageHandler = (e) => {
     setImag(e.target.files[0]);
@@ -51,7 +52,7 @@ setCategories(response.data);
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("Réponse du serveur :", imageUploadResponse.data); // Vérification
+        console.log("Réponse du serveur :", imageUploadResponse.data); 
 
           product.image = imageUploadResponse.data.fileUrl;
           setFileUrl(imageUploadResponse.data.fileUrl)
