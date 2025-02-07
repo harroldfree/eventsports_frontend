@@ -1,88 +1,112 @@
-import React from "react";
-// import "./ListProduct.css";
-import { useState, useEffect } from "react";
-// import cart_cross_icon from "../../assets/cart_cross_icon.png";
-import cart_cross_icon from '/cart_cross_icon.png'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const ListEvent = () => {
-  const [allevents, setAllevents] = useState([]);
+const EventList = () => {
+  const [events, setEvents] = useState([]);
+  const [images, setImages] = useState({}); // Stocker les images par ID d'événement
 
-  const fetchInfo = async () => {
-    await fetch("")
-    // await fetch("http://localhost:4000/allevents")
-
-      .then((res) => res.json())
-      .then((data) => {
-        setAllevents(data);
-      });
-  };
+  // Récupérer les événements depuis le backend
   useEffect(() => {
-    fetchInfo();
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("/api/evenement", {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken"),
+          },
+        });
+        setEvents(response.data);
+
+        // Récupérer les images pour chaque événement
+        response.data.forEach(async (event) => {
+          try {
+            const imgResponse = await axios.get(`/api/evenement/${event.id_evenement}/image`);
+            setImages((prev) => ({
+              ...prev,
+              [event.id_evenement]: imgResponse.data.image_url,
+            }));
+          } catch (error) {
+            console.error("Erreur lors de la récupération de l'image :", error);
+          }
+        });
+      } catch (error) {
+        console.error("Erreur lors de la récupération des événements :", error);
+      }
+    };
+
+    fetchEvents();
   }, []);
 
-  const remove_event = async (_id) => {
-    await fetch(``, {
-    // await fetch(`http://localhost:4000/removeevent`, {
-    
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
-    });
-    await fetchInfo();
-    // .then((res) => res.json())
-    // .then((data) => {
-    //     if(data === "Product removed"){
+  // Supprimer un événement
+  const deleteEvent = async (id) => {
+    if (!window.confirm("Voulez-vous vraiment supprimer cet événement ?")) return;
 
-    //     }
-    // })
+    try {
+      await axios.delete(`/api/evenement/${id}`, {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("authToken"),
+        },
+      });
+      setEvents(events.filter((event) => event.id_evenement !== id));
+      alert("Événement supprimé avec succès !");
+    } catch (error) {
+      console.error("Erreur lors de la suppression :", error);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center w-full h-[740px] p-[10px_50px] m-7 rounded-md bg-white max-md:w-[95%] max-md:h-full max-md:p-[10px_30px] max-md:m-5 max-md:mx-auto">
-      <h1>Liste des évènements</h1>
-      <div className="  grid grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr] gap-2.5 w-full py-5 text-gray-700 text-base max-md:p-[15px_0px] max-md:text-gray-700 max-md:text-xs ">
-        {/* <p>Products</p> */}
-        <p>Nom de l'évènement</p>
-        <p>Lieu</p>
-        <p>Date</p>
-        <p>Categorie</p>
-        <p>Description</p>
-        <p>Retirer</p>
-      </div>
-      <hr />
-      {allevents.map((product, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr] gap-2.5 w-full py-5 text-gray-700 text-base w-full flex items-center font-medium border-b-[0.15rem] border-gray-200"
-            >
-              <img
-                src={product.image}
-                alt=""
-                className="w-[80px] max-md:w-[60px]"
-              />
-              <p>{product.name}</p>
-              <p>${product.lieu}</p>
-              <p>${product.date}</p>
-              <p>{product.category}</p>
-              <p>{product.description}</p>
-
-              <img
-                src={cart_cross_icon}
-                onClick={() => {
-                  remove_event(product._id);
-                }}
-                className="cursor-pointer m-auto max-md:h-15"
-                alt=""
-              />
-              <p>{product.remove}</p>
-            </div>
-      ))}
+    <div className="p-8">
+      <h2 className="text-2xl font-bold mb-4">Liste des événements</h2>
+      <table className="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="border p-2">Nom</th>
+            <th className="border p-2">Image</th>
+            <th className="border p-2">Catégorie</th>
+            <th className="border p-2">Date</th>
+            <th className="border p-2">Lieu</th>
+            <th className="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map((event) => (
+            <tr key={event.id_evenement} className="text-center">
+              <td className="border p-2">{event.nom_evenement}</td>
+              <td className="border p-2">
+                <img
+                  src={images[event.id_evenement] || "/default-image.jpg"}
+                  alt={`Image de ${event.nom_evenement}`}
+                  className="w-16 h-16 object-cover rounded-md shadow-md"
+                />
+              </td>
+              <td className="border p-2">{event.nom_categorie}</td>
+              <td className="border p-2">{event.date_debut}</td>
+              <td className="border p-2">{event.lieu}</td>
+              <td className="border p-2">
+                <button
+                  onClick={() =>
+                    (window.location.href = `/editevent/${event.id_evenement}`)
+                  }
+                  className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => deleteEvent(event.id_evenement)}
+                  className="bg-red-500 text-white px-3 py-1 rounded"
+                >
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default ListEvent;
+export default EventList;
+
+
+
+

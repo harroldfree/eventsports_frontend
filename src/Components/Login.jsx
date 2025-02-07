@@ -32,10 +32,11 @@ function Login() {
         motdepasse: formData.password,
       })
       .then(function (response) {
-        // console.log(response.data);
+        console.log(response.data);
         toast.success(response.data.message)
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("myname", response.data.user.nom);
+        localStorage.setItem("myid", response.data.user.id);
         setTimeout(() => {
           window.location.href = "/";
         }, 3000);

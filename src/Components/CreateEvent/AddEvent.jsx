@@ -4,6 +4,7 @@ import upload_img from '/upload_img.svg';
 
 const AddEvent = () => {
   const [imag, setImag] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
   const [categories, setCategories] = useState([]); // Stocke les catégories
   const [eventDetails, setEventDetails] = useState({
     name: "",
@@ -52,8 +53,8 @@ setCategories(response.data);
         });
         console.log("Réponse du serveur :", imageUploadResponse.data); // Vérification
 
-          product.image = imageUploadResponse.data.image_url;
-          // setImag(imageUploadResponse.data.fileUrl)
+          product.image = imageUploadResponse.data.fileUrl;
+          setFileUrl(imageUploadResponse.data.fileUrl)
       } catch (error) {
         console.error("Erreur lors du téléchargement de l'image :", error);
         alert("Erreur lors du téléchargement de l'image");
@@ -65,7 +66,7 @@ setCategories(response.data);
       const response = await axios.post("/api/evenement", {
         nom_evenement: eventDetails.name,
         // :imag
-        image: product.image,
+        image_url: product.image,
         id_categorie: eventDetails.category,
         date_debut: eventDetails.date,
         lieu: eventDetails.lieu,
@@ -184,3 +185,5 @@ setCategories(response.data);
 };
 
 export default AddEvent;
+
+

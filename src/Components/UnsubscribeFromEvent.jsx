@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ShopContext } from '../Context/ShopContext';
+imp
+
 
 function UnsubscribeEvent() {
+  
+  const { unsubscribeFromEvent } = useContext(ShopContext);
   // État initial des événements auxquels l'utilisateur est inscrit
   const [events, setEvents] = useState();
+
+
   const { productId } = useParams();
 
   // Fonction pour se désinscrire d'un événement
-  const unsubscribeFromEvent = () => {
-    setEvents(events.filter(event => event._id !== productId));
-  };
+ 
 
   return (
     <div>

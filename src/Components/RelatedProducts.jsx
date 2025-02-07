@@ -17,7 +17,7 @@ const RelatedProducts = ({category}) => {
             productsCopy = productsCopy.filter((item)=> category === item.category)
             // productsCopy = productsCopy.filter((item)=> subCategory === item.subCategory)
 
-            setRelated(productsCopy.slice(0,2))
+            setRelated(productsCopy.slice(0,4))
 
         }
     },[products])
@@ -29,8 +29,8 @@ const RelatedProducts = ({category}) => {
         </div>
 
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-            {related.map((item,index)=>(
-                <ProductsItem key={index} id={item._id} name={item.name} image={item.image} category={item.category}/>
+            {related.map((item)=>(
+                <ProductsItem key={item.id_evenement} id={item._id} name={item.nom_evenement} image={item.image} category={item.nom_categorie}/>
             ))}
         </div>
 
