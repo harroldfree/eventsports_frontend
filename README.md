@@ -14,26 +14,34 @@ Currently, two official plugins are available:
 
 Clone du project
 
-bash
-  git clone https://github.com/harroldfree/eventsports_frontend.git
+```bash
+git clone https://github.com/harroldfree/eventsports_frontend.git
+```
+
 
 
 Aller dans le dossier du project
 
-bash
-  cd EVENTSPORT
+```bash
+cd EVENTSPORT
+```
+  
 
 
 Installer les dépendances
 
-bash
-  npm install
+```bash
+npm install
+```
+  
 
 
 Pour lancer le serveur 
 
-bash
-  npm run dev
+```bash
+npm run dev
+```
+  
 
 
 NB : On a eu des difficultés avec les CORS, pour y remedier on a eu a ajouter dans le fichier vite.config.js 
